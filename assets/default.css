@@ -29,3 +29,12 @@
 .fs_meta input[type="text"] {
     width: 400px;
 }
+
+.column-last_scrape, .column-num_scraped_entries {
+    width: 10%;
+    vertical-align: middle !important;
+}
+
+.column-num_scraped_entries {
+    text-align: center !important;
+}

@@ -2,7 +2,6 @@
 
 /**
  * Base Feed Scraper class
- * Mainly used for initialising hooks/filters
  * @package FS
  */
 
@@ -62,6 +61,25 @@ class FS
     }
 
     /**
+     * Callback for get_sample_permalink_html filter
+     * @param string $return The existing HTML for the permalink area
+     * @return string
+     */
+    public static function onWPGetSamplePermalinkHTML( $return )
+    {
+        global $post;
+
+        // No need to display the permalink and related buttons if its a feed/entry
+        if( $post->post_type === 'fs_feed' 
+        || $post->post_Type === 'fs_feed_entry' ) 
+        {
+            return '';
+        }
+        
+        return $return;
+    }
+
+    /**
      * Callback for wordpress init action
      */
     public static function onWPInit()
@@ -71,6 +89,27 @@ class FS
 
         FS_Feed::registerWPPostType();
         FS_Feed_Entry::registerWPPostType();
+    }
+
+    /**
+     * Callback for wordpress manage_posts_custom_column action
+     * @param string $columnName
+     * @param int $ID The Id of the post the column is being generated for
+     */
+    public static function onWPManageFSFeedPostsCustomColumn( $columnName, $ID )
+    {
+        FS_Feed_Admin::addColumnContent( $columnName, $ID );
+    }
+
+    /**
+     * Callback for WP's manage_fs_feed_posts_column action
+     * @param array $columns WP's array of default columns
+     * @return array
+     */
+    public static function onWPManageFSFeedPostsColumns( $columns )
+    {
+        FS_Feed_Admin::addColumns( &$columns );
+        return $columns;
     }
 
     /**
@@ -158,6 +197,7 @@ class FS
         add_action( 'before_delete_post', array( 'FS', 'onWPBeforeDeletePost' ) );
         add_action( 'fs_scrape_interval', array( 'FS', 'onFSScrapeInterval' ) );
         add_action( 'init', array( 'FS', 'onWPInit' ) );
+        add_action( 'manage_fs_feed_posts_custom_column', array( 'FS', 'onWPManageFSFeedPostsCustomColumn' ), 10, 2 );
         add_action( 'save_post', array( 'FS', 'onWPSavePost' ) );
     }
 
@@ -166,6 +206,8 @@ class FS
      */
     private static function _registerFilters()
     {
+        add_filter( 'get_sample_permalink_html', array( 'FS', 'onWPGetSamplePermalinkHTML' ) );
+        add_filter( 'manage_fs_feed_posts_columns', array( 'FS', 'onWPManageFSFeedPostsColumns' ) );
         add_filter( 'post_updated_messages', array( 'FS', 'onWPPostUpdatedMessages' ) );
     }
 
@@ -184,5 +226,4 @@ class FS
     {
         wp_clear_scheduled_hook( 'fs_scrape_interval' );
     }
-
 }

@@ -9,9 +9,9 @@ class FS_Feed_Entry_Admin
 {
     /**
      * Specifies the messages used when performing various post type actions
-     * @param array $messages A reference to WP's message array
+     * @param array &$messages A reference to WP's message array
      */
-    public function filterPostUpdatedMessages( $messages )
+    public function filterPostUpdatedMessages( &$messages )
     {
         $messages['fs_feed_entry'] = array
         (

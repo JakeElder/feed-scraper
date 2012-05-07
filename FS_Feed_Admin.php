@@ -8,6 +8,46 @@
 class FS_Feed_Admin
 {
     /**
+     * Echo's the content for custom columns added to WP's feed management table
+     * @param string $columnName
+     * @param int $ID The ID of the post being rendered into the table
+     */
+    public static function addColumnContent( $columnName, $ID )
+    {
+        $feed = new FS_Feed( $ID );
+
+        if( $columnName === 'last_scrape' )
+        {
+            $lastScrape = $feed->getLastScrape();
+            echo is_null( $lastScrape ) ? 'Never' : $lastScrape->format( 'd/m/Y H:i:s' );
+        }
+
+        if( $columnName === 'num_scraped_entries' )
+        {
+            echo count( $feed->getEntries() );
+        }
+    }
+
+    /**
+     * Adds columns to WP admin's feed viewing table
+     * @param array &$columns WP's array of table columns
+     */
+    public static function addColumns( &$columns )
+    {
+        $new = array_slice( $columns, 0, -1, true );
+
+        $new += array
+        (
+            'num_scraped_entries' => 'Entries',
+            'last_scrape' => 'Last Scrape'
+        );
+
+        $new += array_slice( $columns, -1, 1, true );
+
+        $columns = $new;
+    }
+
+    /**
      * Registers a custom meta box write panel for fs_feed administration page
      */
     public static function addMetaBoxes()
@@ -125,7 +165,6 @@ class FS_Feed_Admin
             FS_Feed_Entries::delete( $postID );
         }
     }
-
 
     /**
      * Performs any functions necessary after a feed has been saved
