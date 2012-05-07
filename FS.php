@@ -149,6 +149,28 @@ class FS
         self::_unregisterScrapeCron();
     }
 
+    /**
+     * Callback for WP's post_row_actions action
+     * Removes unnecessary administration links from the WP feed/feed entry table
+     * @param array $actions Array of action links
+     * @param object $post WP post object for the current row
+     * @return array
+     */
+    public static function onWPPostRowActions( $actions, $post )
+    {
+        if( $post->post_type === 'fs_feed' || $post->post_type === 'fs_feed_entry' )
+        {
+            unset( $actions['inline hide-if-no-js'], $actions['view'] );
+        }
+
+        if( $post->post_type === 'fs_feed_entry' )
+        {
+            unset( $actions['edit'] );
+        }
+
+        return $actions;
+    }
+
     public static function onWPPostUpdatedMessages( $messages )
     {
         FS_Feed_Admin::filterPostUpdatedMessages( &$messages );
@@ -220,6 +242,7 @@ class FS
         add_action( 'init', array( 'FS', 'onWPInit' ) );
         add_action( 'manage_fs_feed_entry_posts_custom_column', array( 'FS', 'onWPManageFSFeedEntryPostsCustomColumn' ), 10, 2 );
         add_action( 'manage_fs_feed_posts_custom_column', array( 'FS', 'onWPManageFSFeedPostsCustomColumn' ), 10, 2 );
+        add_action( 'post_row_actions', array( 'FS', 'onWPPostRowActions' ), 10, 2 );
         add_action( 'save_post', array( 'FS', 'onWPSavePost' ) );
     }
 
