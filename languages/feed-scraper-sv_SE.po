@@ -1,0 +1,22 @@
+# Copyright (C) 2012 Feed Scraper
+# This file is distributed under the same license as the Feed Scraper package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Feed Scraper 1.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/feed-scraper\n"
+"POT-Creation-Date: 2012-04-28 19:28:05+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2012-04-28 20:58+0100\n"
+"Last-Translator: Jake Elder <jake@jpeg.me.uk>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: FS_Feed_Entry.php:62
+msgid "Date posted"
+msgstr "Datum"
+
+#: FS_Feed_Entry.php:66
+msgid "Read more"
+msgstr "Läs mer"
+
