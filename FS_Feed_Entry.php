@@ -137,7 +137,8 @@ class FS_Feed_Entry
                     'edit' => 'Edit',
                     'view' => 'View Feed Entry'
                 ),
-                'public' => true
+                'public' => false,
+                'show_ui' => true
             )
         );
     }

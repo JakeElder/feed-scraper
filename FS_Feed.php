@@ -237,7 +237,8 @@ class FS_Feed
                     'edit' => 'Edit',
                     'view' => 'View Feed'
                 ),
-                'public' => true,
+                'public' => false,
+                'show_ui' => true,
                 'supports' => array( 'title', 'thumbnail' )
             )
         );
