@@ -38,3 +38,9 @@
 .column-num_scraped_entries {
     text-align: center !important;
 }
+
+ .column-scraped_from {
+    padding-left: 20px !important;
+    width: 130px;
+    font-weight: bold;
+ }
