@@ -16,6 +16,7 @@ class FS
     {
         $nextScheduledTimestamp = wp_next_scheduled( 'fs_scrape_interval' );
         $nextScheduledDate = new DateTime( '@'. $nextScheduledTimestamp );
+        $nextScheduledDate->setTimeZone( new DateTimeZone( FS_OUTPUT_TIMEZONE ) );
         return $nextScheduledDate->format( $format );
     }
 

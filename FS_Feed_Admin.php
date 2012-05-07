@@ -19,7 +19,15 @@ class FS_Feed_Admin
         if( $columnName === 'last_scrape' )
         {
             $lastScrape = $feed->getLastScrape();
-            echo is_null( $lastScrape ) ? 'Never' : $lastScrape->format( 'd/m/Y H:i:s' );
+            if( is_null( $lastScrape ) )
+            {
+                echo 'Never';
+            }
+            else
+            {
+                $lastScrape->setTimeZone( new DateTimeZone( FS_OUTPUT_TIMEZONE ) );
+                echo $lastScrape->format( 'd/m/Y H:i:s' );
+            }
         }
 
         if( $columnName === 'num_scraped_entries' )
@@ -123,6 +131,7 @@ class FS_Feed_Admin
         }
         else
         {
+            $lastScrape->setTimeZone( new DateTimeZone( FS_OUTPUT_TIMEZONE ) );
             $lastScrape = $lastScrape->format( 'd/m/Y H:i:s' );
             $nextScrape = FS::nextScheduledScrape();
         }

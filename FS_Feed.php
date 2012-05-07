@@ -88,8 +88,6 @@ class FS_Feed
      */
     public function scrape()
     {
-        echo $this->_url .'<br />';
-
         $feedValid = true;
 
         $contents = @file_get_contents( $this->_url );
@@ -120,17 +118,17 @@ class FS_Feed
 
         foreach( $feed->channel->item as $entry )
         {
-            $entryDate = dateCreateFromRSSPubDate( $entry->pubDate );
+            $entryDate = dateCreateFromRSSPubDate( ( string ) $entry->pubDate );
 
             if( $entryDate > $this->_lastScrape )
             {
                 $FSEntry = new FS_Feed_Entry
                 (
-                    strip_tags( $entry->description->__toString() ),
+                    strip_tags( ( string ) $entry->description ),
                     $this->_ID,
-                    $entry->pubDate->__toString(),
-                    $entry->title->__toString(),
-                    $entry->link->__toString()
+                    ( string ) $entry->pubDate,
+                    ( string ) $entry->title,
+                    ( string ) $entry->link
                 );
 
                 $FSEntry->insert();
