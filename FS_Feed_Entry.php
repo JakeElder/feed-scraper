@@ -43,7 +43,7 @@ class FS_Feed_Entry
     {
         $this->_excerpt = $excerpt;
         $this->_feedID = $feedID;
-        $this->_pubDate = DateTime::createFromFormat( DATE_RSS, $pubDate );
+        $this->_pubDate = dateCreateFromRSSPubDate( $pubDate );
         $this->_title = $title;
         $this->_url = $url;
     }

@@ -120,7 +120,7 @@ class FS_Feed
 
         foreach( $feed->channel->item as $entry )
         {
-            $entryDate = DateTime::createFromFormat( DATE_RSS, $entry->pubDate );
+            $entryDate = dateCreateFromRSSPubDate( $entry->pubDate );
 
             if( $entryDate > $this->_lastScrape )
             {

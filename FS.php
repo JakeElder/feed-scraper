@@ -15,7 +15,7 @@ class FS
     public static function nextScheduledScrape( $format = 'd/m/Y H:i:s' )
     {
         $nextScheduledTimestamp = wp_next_scheduled( 'fs_scrape_interval' );
-        $nextScheduledDate = DateTime::createFromFormat( 'U', $nextScheduledTimestamp );
+        $nextScheduledDate = new DateTime( '@'. $nextScheduledTimestamp );
         return $nextScheduledDate->format( $format );
     }
 
