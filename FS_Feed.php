@@ -221,6 +221,22 @@ class FS_Feed
             array
             (
                 'label' => 'Feeds',
+                'labels' => array
+                (
+                    'name' => 'Feeds',
+                    'singular_name' => 'Feed',
+                    'add_new' => 'Add New',
+                    'add_new_item' => 'Add New Feed',
+                    'edit_item' => 'Edit Feed',
+                    'new_item' => 'New Feed',
+                    'view_item' => 'View Feed',
+                    'search_items' => 'Search Feeds',
+                    'not_found' => 'No Feeds Found',
+                    'not_found_in_trash' => 'No Feeds Found In Trash',
+                    'parent_item_colon' => 'Parent Feeds:',
+                    'edit' => 'Edit',
+                    'view' => 'View Feed'
+                ),
                 'public' => true,
                 'supports' => array( 'title', 'thumbnail' )
             )

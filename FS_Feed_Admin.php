@@ -156,10 +156,12 @@ class FS_Feed_Admin
         $feed->setUrl( $_POST['fs_feed_url'] );
     }
 
-    public function filterPostUpdatedMessages( $messages )
+    /**
+     * Specifies the messages used when performing various post type actions
+     * @param array $messages A reference to WP's message array
+     */
+    public function filterPostUpdatedMessages( &$messages )
     {
-        global $post, $post_ID;
-
         $messages['fs_feed'] = array
         (
             1 => 'Feed updated',
@@ -168,6 +170,7 @@ class FS_Feed_Admin
             7 => 'Feed saved'
         );
 
-        return $messages;
+        // Use generic post messages for less common/unused messages
+        $messages['fs_feed'] += $messages['post'];
     }
 }

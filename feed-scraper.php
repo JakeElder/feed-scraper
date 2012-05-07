@@ -12,6 +12,7 @@ require_once( plugin_dir_path( __FILE__ ) .'FS_Feed.php' );
 require_once( plugin_dir_path( __FILE__ ) .'FS_Feed_Admin.php' );
 require_once( plugin_dir_path( __FILE__ ) .'FS_Feed_Entries.php' );
 require_once( plugin_dir_path( __FILE__ ) .'FS_Feed_Entry.php' );
+require_once( plugin_dir_path( __FILE__ ) .'FS_Feed_Entry_Admin.php' );
 
 register_activation_hook( __FILE__ , array( 'FS', 'onWPPluginActivation' ) );
 register_deactivation_hook( __FILE__ , array( 'FS', 'onWPPluginDeactivation' ) );

@@ -115,13 +115,28 @@ class FS_Feed_Entry
      */
     public static function registerWPPostType()
     {
-        flush_rewrite_rules();
         register_post_type
         (
             'fs_feed_entry',
             array
             (
                 'label' => 'Feed Entries',
+                'labels' => array
+                (
+                    'name' => 'Feed Entries',
+                    'singular_name' => 'Feed Entry',
+                    'add_new' => 'Add New',
+                    'add_new_item' => 'Add New Feed Entry',
+                    'edit_item' => 'Edit Feed Entry',
+                    'new_item' => 'New Feed Entry',
+                    'view_item' => 'View Feed Entry',
+                    'search_items' => 'Search Feed Entries',
+                    'not_found' => 'No Feed Entries Found',
+                    'not_found_in_trash' => 'No Feed Entries Found In Trash',
+                    'parent_item_colon' => 'Parent Feed Entries:',
+                    'edit' => 'Edit',
+                    'view' => 'View Feed Entry'
+                ),
                 'public' => true
             )
         );

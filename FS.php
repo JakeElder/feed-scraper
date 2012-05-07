@@ -89,6 +89,14 @@ class FS
         self::_unregisterScrapeCron();
     }
 
+    public static function onWPPostUpdatedMessages( $messages )
+    {
+        FS_Feed_Admin::filterPostUpdatedMessages( &$messages );
+        FS_Feed_Entry_Admin::filterPostUpdatedMessages( &$messages );
+
+        return $messages;
+    }
+
     /**
      * Callback for wordpress save_post action
      * @return type
@@ -158,7 +166,7 @@ class FS
      */
     private static function _registerFilters()
     {
-        add_filter( 'post_updated_messages', array( 'FS_Feed_Admin', 'filterPostUpdatedMessages' ) );
+        add_filter( 'post_updated_messages', array( 'FS', 'onWPPostUpdatedMessages' ) );
     }
 
     /**
